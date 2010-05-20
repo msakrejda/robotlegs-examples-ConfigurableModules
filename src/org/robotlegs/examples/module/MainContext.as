@@ -8,10 +8,10 @@ package org.robotlegs.examples.module
     import org.robotlegs.examples.module.signal.CreateModuleSignal;
     import org.robotlegs.examples.module.signal.ListModulesSignal;
     import org.robotlegs.examples.module.signal.ModulesChangedSignal;
-    import org.robotlegs.examples.module.view.BuilderView;
-    import org.robotlegs.examples.module.view.ModuleConfiguratorView;
+    import org.robotlegs.examples.module.signal.PokeModulesSignal;
     import org.robotlegs.examples.module.view.model.BuilderViewModel;
     import org.robotlegs.examples.module.view.model.ModuleConfiguratorViewModel;
+    import org.robotlegs.examples.module.view.model.PokingViewModel;
     import org.robotlegs.mvcs.SignalContext;
 
     public class MainContext extends SignalContext
@@ -32,10 +32,12 @@ package org.robotlegs.examples.module
 
             injector.mapSingleton(BuilderViewModel);
             injector.mapSingleton(ModuleConfiguratorViewModel);
+            injector.mapSingleton(PokingViewModel);
             
             injector.mapSingleton(CreateModuleSignal);
             injector.mapSingleton(ListModulesSignal);
             injector.mapSingleton(ModulesChangedSignal);
+            injector.mapSingleton(PokeModulesSignal);
 
             signalCommandMap.mapSignalClass(CreateModuleSignal, CreateModuleCommand); 
 

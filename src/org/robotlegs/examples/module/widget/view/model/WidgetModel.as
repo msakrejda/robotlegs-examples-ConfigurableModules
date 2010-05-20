@@ -4,11 +4,15 @@ package org.robotlegs.examples.module.widget.view.model
     import flash.events.EventDispatcher;
     
     import org.robotlegs.examples.module.model.vo.ModuleVO;
+    import org.robotlegs.examples.module.signal.PokeModulesSignal;
     
     public class WidgetModel extends EventDispatcher
     {
         private var _config:ModuleVO;
-        
+
+        [Inject]
+        public var pokeSignal:PokeModulesSignal;
+
         [Inject]
         public function set config(value:ModuleVO):void
         {

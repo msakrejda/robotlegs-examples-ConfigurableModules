@@ -1,24 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="140" height="120"
-    horizontalAlign="center" verticalAlign="middle"
+    horizontalAlign="center" verticalAlign="middle" creationComplete="handleInit(event)"
     title="{model.title}" color="{model.textColor}" backgroundColor="{model.backgroundColor}" >
     <mx:Script>
         <![CDATA[
+            import org.robotlegs.examples.module.signal.PokeModulesSignal;
             import org.robotlegs.core.IInjector;
             import org.robotlegs.examples.module.widget.view.model.WidgetModel;
             import org.robotlegs.examples.module.widget.WidgetContext;
             import org.robotlegs.examples.module.model.vo.ModuleVO;
 
-            [Inject]
-            [Bindable]
-            public var model:WidgetModel;
-
+            private var _model:WidgetModel;
             private var _context:WidgetContext;
+
+            private var _pokeTimer:Timer;
 
             public function configure(config:ModuleVO, injector:IInjector):void
             {
                 _context = new WidgetContext(config, this, injector);
             }
+
+            [Bindable]
+            public function get model():WidgetModel
+            {
+                return _model;
+            }
+            [Inject]
+            public function set model(value:WidgetModel):void
+            {
+                if (_model) {
+                    _model.pokeSignal.remove(handlePoke);
+                }
+                _model = value;
+                if (_model) {
+                    _model.pokeSignal.add(handlePoke);
+                }
+            }
+            private function handleInit(event:Event):void
+            {
+                _pokeTimer = new Timer(200, 6);
+                _pokeTimer.addEventListener(TimerEvent.TIMER, handlePokeTick);
+            }
+            private function handlePoke():void
+            {
+                _pokeTimer.reset();
+                _pokeTimer.start();
+            }
+            private function handlePokeTick(e:TimerEvent):void
+            {
+                var backgroundColor:uint = getStyle('backgroundColor') as uint;
+                if (backgroundColor == model.backgroundColor) {
+                    setStyle('backgroundColor', 0xccff00);
+                } else {
+                    setStyle('backgroundColor', model.backgroundColor);
+                }
+            }
+            
 
         ]]>
     </mx:Script>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical"
+    verticalAlign="middle" horizontalAlign="center">
+    <mx:Script>
+        <![CDATA[
+            import org.robotlegs.examples.module.view.model.PokingViewModel;
+            [Bindable]
+            [Inject]
+            public var model:PokingViewModel;
+        ]]>
+    </mx:Script>
+    <mx:Button label="Poke" click="model.sendPoke()"/>
+</mx:Panel>
