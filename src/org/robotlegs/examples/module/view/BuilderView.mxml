@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="horizontal" width="100%" height="100%">
+    <mx:Script>
+        <![CDATA[
+            import org.robotlegs.examples.module.model.vo.ModuleVO;
+            import org.robotlegs.examples.module.widget.view.WidgetModule;
+            import org.robotlegs.examples.module.widget.view.model.WidgetModel;
+            import mx.core.UIComponent;
+            import org.robotlegs.examples.module.view.model.BuilderViewModel;
+            import org.robotlegs.examples.module.ModuleFactory;
+            import mx.modules.Module;
+
+            [Inject]
+            [Bindable]
+            public var model:BuilderViewModel;
+
+            [Inject]
+            public var widgetFactory:ModuleFactory;
+
+            private function handleChange(event:Event):void
+            {
+                var widgetModule:WidgetModule = widgetFactory.create(moduleList.selectedItem as ModuleVO);
+                moduleDisplay.addChild(widgetModule);
+            }
+        ]]>
+    </mx:Script>
+    <mx:List id="moduleList" height="100%" width="200" dataProvider="{model.moduleList}" labelField="title" change="handleChange(event)"/>
+    <mx:Tile id="moduleDisplay" width="100%" height="100%"/>
+</mx:Panel>

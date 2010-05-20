@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="120" height="120"
+    title="{model.title}" backgroundColor="{model.color}" horizontalAlign="center" verticalAlign="middle">
+    <mx:Script>
+        <![CDATA[
+            import org.robotlegs.core.IInjector;
+            import org.robotlegs.examples.module.widget.view.model.WidgetModel;
+            import org.robotlegs.examples.module.widget.WidgetContext;
+            import org.robotlegs.examples.module.model.vo.ModuleVO;
+
+            [Inject]
+            [Bindable]
+            public var model:WidgetModel;
+
+            private var _context:WidgetContext;
+
+            public function configure(config:ModuleVO, injector:IInjector):void
+            {
+                _context = new WidgetContext(config, this, injector);
+            }
+
+        ]]>
+    </mx:Script>
+    <mx:Label text="{model.description}"/>
+</mx:Panel>

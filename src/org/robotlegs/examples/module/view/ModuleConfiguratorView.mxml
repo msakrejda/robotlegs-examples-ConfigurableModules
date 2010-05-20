@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical">
+    <mx:Script>
+        <![CDATA[
+            import org.robotlegs.examples.module.view.model.ModuleConfiguratorViewModel;
+            import org.robotlegs.examples.module.model.vo.ModuleVO;
+            [Bindable]
+            [Inject]
+            public var model:ModuleConfiguratorViewModel;
+            
+            private function handleClick(e:Event):void
+            {
+                model.create(new ModuleVO(moduleTitle.text, moduleColor.selectedColor));
+            }
+        ]]>
+    </mx:Script>
+    <mx:Form width="100%" height="100%">
+        <mx:FormHeading label="Configure Widget"/>
+        <mx:FormItem label="Title">
+            <mx:TextInput id="moduleTitle" width="200"/>
+        </mx:FormItem>
+        <mx:FormItem label="Color">
+            <mx:ColorPicker id="moduleColor"/>
+        </mx:FormItem>
+        <mx:FormItem>
+            <mx:Button label="Create" click="handleClick(event)"/>
+        </mx:FormItem>
+    </mx:Form>
+</mx:Panel>
