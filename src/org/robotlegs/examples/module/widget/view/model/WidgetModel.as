@@ -23,29 +23,52 @@ package org.robotlegs.examples.module.widget.view.model
         }
         
         [Bindable(event='configChanged')]
-        public function get color():uint
+        public function get textColor():uint
+        {
+            var channels:Object = getRgb(_config.color);
+            var textColor:uint = 0xffffff;
+            for each (var channel:uint in channels) {
+                if (channel > 0xCC) {
+                    textColor = 0x000000;
+                    break;
+                }
+            }
+
+            return textColor;
+        }
+        
+        [Bindable(event='configChanged')]
+        public function get backgroundColor():uint
         {
             return _config.color;
-        }
+        }        
 
         [Bindable(event='configChanged')]
         public function get description():String
         {
-            var r:uint = (_config.color & 0xff) >> 16;
-            var g:uint = (_config.color & 0xff) >> 8;
-            var b:uint = _config.color & 0xff;
-            if (r > 192 && g < 32 && b < 32) {
+            const highThrehsold:uint = 192;
+            const lowThrehsold:uint = 64;
+            var channels:Object = getRgb(_config.color);
+            
+            if (channels.r > highThrehsold && channels.g < lowThrehsold && channels.b < lowThrehsold) {
                 return 'a reddish module';
-            } else if (g > 192 && r < 32 && b < 32) {
+            } else if (channels.g > highThrehsold && channels.r < lowThrehsold && channels.b < lowThrehsold) {
                 return 'a greenish module';
-            } else if (b > 192 && r < 32 && g < 32) {
+            } else if (channels.b > highThrehsold && channels.r < lowThrehsold && channels.g < lowThrehsold) {
                 return 'a bluish module';
             } else {
                 return 'a nondescript module';
             }
         }
 
-        
+        private function getRgb(color:uint):Object
+        {
+            return {
+                r: (color >> 16) & 0xff,
+                g: (color >> 8) & 0xff,
+                b: color & 0xff
+            };
+        }
 
     }
 }

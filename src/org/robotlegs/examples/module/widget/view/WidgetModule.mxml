@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="120" height="120"
-    title="{model.title}" backgroundColor="{model.color}" horizontalAlign="center" verticalAlign="middle">
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" layout="vertical" width="140" height="120"
+    horizontalAlign="center" verticalAlign="middle"
+    title="{model.title}" color="{model.textColor}" backgroundColor="{model.backgroundColor}" >
     <mx:Script>
         <![CDATA[
             import org.robotlegs.core.IInjector;
