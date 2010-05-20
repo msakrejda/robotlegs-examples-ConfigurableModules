@@ -1,10 +1,10 @@
-A simple (currently non-working) example of using RL, Signals,
-Presentation Models, and a modular application. Note that the modules
-are not modules in the Flex sense: they could be, but that's
-orthogonal to this architecture. The important part is that each
-module has its own local context, and each module's interactions can
-either be confined to that context or shared with other modules (and
-the parent application) through injected Signals. The other important
-part is that, unlike the other modular RL examples I've seen (and like
-Theo Hultberg's documentbased Mate example application), each module
-is injected with a unique configuration when it is first created.
+A simple example of using RL, Signals, Presentation Models, and a
+modular application. Note that the modules are not modules in the Flex
+sense: they could be, but that's orthogonal to this architecture. The
+important part is that each module has its own local context, and each
+module's interactions can either be confined to that context or shared
+with other modules (and the parent application) through injected
+Signals. The other important part is that, unlike the other modular RL
+examples I've seen (and like Theo Hultberg's documentbased Mate
+example application), each module is injected with a unique
+configuration when it is first created.
