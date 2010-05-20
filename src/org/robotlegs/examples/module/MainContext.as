@@ -16,6 +16,8 @@ package org.robotlegs.examples.module
 
     public class MainContext extends SignalContext
     {
+        private static const VIEW_PACKAGE:String = 'org.robotlegs.examples.module.view';
+        
         public function MainContext(contextView:DisplayObjectContainer=null, autoStartup:Boolean=true)
         {
             super(contextView, autoStartup);
@@ -23,8 +25,7 @@ package org.robotlegs.examples.module
 
         public override function startup():void
         {
-            viewMap.mapType(BuilderView);
-            viewMap.mapType(ModuleConfiguratorView);
+            viewMap.mapPackage(VIEW_PACKAGE);
 
             injector.mapSingleton(Modules);
             injector.mapSingleton(ModuleFactory);
